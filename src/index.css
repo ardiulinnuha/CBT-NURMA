@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .font-arabic {
+    font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', serif;
+    direction: rtl;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Subtle Animated Mesh Gradient */
+@keyframes meshFloat {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Apple-style Ambient Floating Orbs */
+@keyframes orbFloat1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-24px, 18px, 0) scale(1.06); }
+  100% { transform: translate3d(20px, -12px, 0) scale(0.96); }
+}
+
+@keyframes orbFloat2 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(18px, -20px, 0) scale(1.05); }
+  100% { transform: translate3d(-14px, 12px, 0) scale(0.95); }
+}
+
+@keyframes orbFloat3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-16px, -18px, 0) scale(1.06); }
+  100% { transform: translate3d(20px, 14px, 0) scale(0.94); }
+}
+
+.animate-orb-1 {
+  animation: orbFloat1 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-orb-2 {
+  animation: orbFloat2 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-orb-3 {
+  animation: orbFloat3 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.bg-mesh-apple {
+  background: radial-gradient(at 0% 0%, rgba(0, 113, 227, 0.07) 0px, transparent 50%),
+              radial-gradient(at 100% 0%, rgba(52, 199, 89, 0.05) 0px, transparent 50%),
+              radial-gradient(at 50% 100%, rgba(94, 92, 230, 0.06) 0px, transparent 50%),
+              radial-gradient(at 100% 100%, rgba(0, 113, 227, 0.04) 0px, transparent 50%);
+  background-size: 200% 200%;
+  animation: meshFloat 18s ease-in-out infinite;
+}
+
+.dark .bg-mesh-apple {
+  background: radial-gradient(at 0% 0%, rgba(10, 132, 255, 0.12) 0px, transparent 50%),
+              radial-gradient(at 100% 0%, rgba(48, 209, 88, 0.08) 0px, transparent 50%),
+              radial-gradient(at 50% 100%, rgba(94, 92, 230, 0.1) 0px, transparent 50%);
+  background-size: 200% 200%;
+  animation: meshFloat 18s ease-in-out infinite;
+}
+
+/* Subtle Geometric Girih / Arabesque Texture (Max 4% Opacity) */
+.bg-arabesque-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30zM30 10l20 20-20 20-20-20zM30 20l10 10-10 10-10-10z' fill='%230071E3' fill-opacity='0.035' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.dark .bg-arabesque-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30L0 30zM30 10l20 20-20 20-20-20zM30 20l10 10-10 10-10-10z' fill='%23FFFFFF' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Respect Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .bg-mesh-apple {
+    animation: none !important;
+  }
+}
+
+/* Print Rules: Clean, 1 Page A4, Zero Shadows, Zero UI Controls */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-modal-container {
+    position: static !important;
+    padding: 0 !important;
+    background: transparent !important;
+    max-height: none !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  .print-modal-card {
+    max-height: none !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .page-break-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

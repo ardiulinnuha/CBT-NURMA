@@ -1,0 +1,8 @@
+{
+  "name": "Tes Diagnostik MA Nurul Ummah",
+  "description": "Aplikasi web pemetaan kompetensi murid baru MA Nurul Ummah terintegrasi pesantren, ramah anak dan berbasis peran.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
